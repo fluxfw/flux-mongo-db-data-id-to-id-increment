@@ -1,0 +1,14 @@
+{
+    "name": "flux-data-id-to-id-increment-api",
+    "productName": "flux-data-id-to-id-increment-api",
+    "version": "2022-11-28-1",
+    "description": "",
+    "keywords": [],
+    "homepage": "",
+    "peerDependencies": {
+        "flux-hash-api": "*",
+        "flux-id-increment-api": "*",
+        "mongodb": "*"
+    },
+    "private": true
+}
