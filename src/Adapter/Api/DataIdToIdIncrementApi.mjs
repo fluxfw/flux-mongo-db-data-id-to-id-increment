@@ -1,5 +1,4 @@
 /** @typedef {import("mongodb").Collection} Collection */
-
 /** @typedef {import("../../Service/DataIdToIdIncrement/Port/DataIdToIdIncrementService.mjs").DataIdToIdIncrementService} DataIdToIdIncrementService */
 /** @typedef {import("../../../../flux-hash-api/src/Adapter/Api/HashApi.mjs").HashApi} HashApi */
 /** @typedef {import("../../../../flux-id-increment-api/src/Adapter/Api/IdIncrementApi.mjs").IdIncrementApi} IdIncrementApi */
