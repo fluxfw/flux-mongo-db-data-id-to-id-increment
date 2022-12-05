@@ -1,5 +1,4 @@
 /** @typedef {import("mongodb").Collection} Collection */
-
 /** @typedef {import("../../../../../flux-id-increment-api/src/Adapter/Api/IdIncrementApi.mjs").IdIncrementApi} IdIncrementApi */
 
 export class GetCommand {
