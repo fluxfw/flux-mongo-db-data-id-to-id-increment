@@ -1,3 +1,5 @@
+import { ALGORITHM_SHA_256 } from "../../../../../flux-hash-api/src/Adapter/Algorithm/ALGORITHM.mjs";
+
 /** @typedef {import("../../../../../flux-hash-api/src/Adapter/Api/HashApi.mjs").HashApi} HashApi */
 
 export class GetDataIdFromValuesCommand {
@@ -31,7 +33,7 @@ export class GetDataIdFromValuesCommand {
     async getDataIdFromValues(values) {
         return this.#hash_api.generateHash(
             values.map(value => typeof value === "string" ? encodeURIComponent(value.trim().toLowerCase()) : value ?? "").join("%"),
-            "sha-256"
+            ALGORITHM_SHA_256
         );
     }
 }
