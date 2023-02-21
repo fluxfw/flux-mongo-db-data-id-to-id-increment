@@ -1,29 +1,16 @@
-import { ALGORITHM_SHA_256 } from "../../../../../flux-hash-api/src/Adapter/Algorithm/ALGORITHM.mjs";
-
-/** @typedef {import("../../../../../flux-hash-api/src/Adapter/Api/HashApi.mjs").HashApi} HashApi */
-
 export class GetDataIdFromValuesCommand {
     /**
-     * @type {HashApi}
-     */
-    #hash_api;
-
-    /**
-     * @param {HashApi} hash_api
      * @returns {GetDataIdFromValuesCommand}
      */
-    static new(hash_api) {
-        return new this(
-            hash_api
-        );
+    static new() {
+        return new this();
     }
 
     /**
-     * @param {HashApi} hash_api
      * @private
      */
-    constructor(hash_api) {
-        this.#hash_api = hash_api;
+    constructor() {
+
     }
 
     /**
@@ -31,9 +18,6 @@ export class GetDataIdFromValuesCommand {
      * @returns {Promise<string>}
      */
     async getDataIdFromValues(values) {
-        return this.#hash_api.generateHash(
-            values.map(value => typeof value === "string" ? encodeURIComponent(value.trim().toLowerCase()) : value ?? "").join("%"),
-            ALGORITHM_SHA_256
-        );
+        return Buffer.from(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(values.map(value => typeof value === "string" ? encodeURIComponent(value.trim().toLowerCase()) : value ?? "").join("%")))).toString("hex");
     }
 }

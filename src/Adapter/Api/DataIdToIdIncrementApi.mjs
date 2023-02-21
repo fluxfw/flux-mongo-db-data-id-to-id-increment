@@ -1,6 +1,5 @@
 /** @typedef {import("mongodb").Collection} Collection */
 /** @typedef {import("../../Service/DataIdToIdIncrement/Port/DataIdToIdIncrementService.mjs").DataIdToIdIncrementService} DataIdToIdIncrementService */
-/** @typedef {import("../../../../flux-hash-api/src/Adapter/Api/HashApi.mjs").HashApi} HashApi */
 /** @typedef {import("../../../../flux-id-increment-api/src/Adapter/Api/IdIncrementApi.mjs").IdIncrementApi} IdIncrementApi */
 
 export class DataIdToIdIncrementApi {
@@ -13,10 +12,6 @@ export class DataIdToIdIncrementApi {
      */
     #data_id_to_id_increment_service = null;
     /**
-     * @type {HashApi}
-     */
-    #hash_api;
-    /**
      * @type {IdIncrementApi}
      */
     #id_increment_api;
@@ -27,15 +22,13 @@ export class DataIdToIdIncrementApi {
 
     /**
      * @param {Collection} collection
-     * @param {HashApi} hash_api
      * @param {IdIncrementApi} id_increment_api
      * @param {string} id_increment_service_prefix
      * @returns {DataIdToIdIncrementApi}
      */
-    static new(collection, hash_api, id_increment_api, id_increment_service_prefix) {
+    static new(collection, id_increment_api, id_increment_service_prefix) {
         return new this(
             collection,
-            hash_api,
             id_increment_api,
             id_increment_service_prefix
         );
@@ -43,14 +36,12 @@ export class DataIdToIdIncrementApi {
 
     /**
      * @param {Collection} collection
-     * @param {HashApi} hash_api
      * @param {IdIncrementApi} id_increment_api
      * @param {string} id_increment_service_prefix
      * @private
      */
-    constructor(collection, hash_api, id_increment_api, id_increment_service_prefix) {
+    constructor(collection, id_increment_api, id_increment_service_prefix) {
         this.#collection = collection;
-        this.#hash_api = hash_api;
         this.#id_increment_api = id_increment_api;
         this.#id_increment_service_prefix = id_increment_service_prefix;
     }
@@ -105,7 +96,6 @@ export class DataIdToIdIncrementApi {
     async #getDataIdToIdIncrementService() {
         this.#data_id_to_id_increment_service ??= (await import("../../Service/DataIdToIdIncrement/Port/DataIdToIdIncrementService.mjs")).DataIdToIdIncrementService.new(
             this.#collection,
-            this.#hash_api,
             this.#id_increment_api,
             this.#id_increment_service_prefix
         );

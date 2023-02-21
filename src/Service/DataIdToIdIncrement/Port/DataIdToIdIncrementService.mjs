@@ -1,5 +1,4 @@
 /** @typedef {import("mongodb").Collection} Collection */
-/** @typedef {import("../../../../../flux-hash-api/src/Adapter/Api/HashApi.mjs").HashApi} HashApi */
 /** @typedef {import("../../../../../flux-id-increment-api/src/Adapter/Api/IdIncrementApi.mjs").IdIncrementApi} IdIncrementApi */
 
 export class DataIdToIdIncrementService {
@@ -7,10 +6,6 @@ export class DataIdToIdIncrementService {
      * @type {Collection}
      */
     #collection;
-    /**
-     * @type {HashApi}
-     */
-    #hash_api;
     /**
      * @type {IdIncrementApi}
      */
@@ -22,15 +17,13 @@ export class DataIdToIdIncrementService {
 
     /**
      * @param {Collection} collection
-     * @param {HashApi} hash_api
      * @param {IdIncrementApi} id_increment_api
      * @param {string} id_increment_service_prefix
      * @returns {DataIdToIdIncrementService}
      */
-    static new(collection, hash_api, id_increment_api, id_increment_service_prefix) {
+    static new(collection, id_increment_api, id_increment_service_prefix) {
         return new this(
             collection,
-            hash_api,
             id_increment_api,
             id_increment_service_prefix
         );
@@ -38,14 +31,12 @@ export class DataIdToIdIncrementService {
 
     /**
      * @param {Collection} collection
-     * @param {HashApi} hash_api
      * @param {IdIncrementApi} id_increment_api
      * @param {string} id_increment_service_prefix
      * @private
      */
-    constructor(collection, hash_api, id_increment_api, id_increment_service_prefix) {
+    constructor(collection, id_increment_api, id_increment_service_prefix) {
         this.#collection = collection;
-        this.#hash_api = hash_api;
         this.#id_increment_api = id_increment_api;
         this.#id_increment_service_prefix = id_increment_service_prefix;
     }
@@ -87,9 +78,7 @@ export class DataIdToIdIncrementService {
      * @returns {Promise<string>}
      */
     async getDataIdFromValues(values) {
-        return (await import("../Command/GetDataIdFromValuesCommand.mjs")).GetDataIdFromValuesCommand.new(
-            this.#hash_api
-        )
+        return (await import("../Command/GetDataIdFromValuesCommand.mjs")).GetDataIdFromValuesCommand.new()
             .getDataIdFromValues(
                 values
             );

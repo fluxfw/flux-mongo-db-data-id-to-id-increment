@@ -6,6 +6,12 @@ Changes:
 
 \-
 
+## v2023-02-21-1
+
+Changes:
+
+- Remove hash api
+
 ## v2023-02-09-1
 
 Changes:
