@@ -1,5 +1,5 @@
 /** @typedef {import("mongodb").Collection} Collection */
-/** @typedef {import("../../flux-mongo-db-id-increment/src/FluxMongoDbIdIncrement.mjs").FluxMongoDbIdIncrement} FluxMongoDbIdIncrement */
+/** @typedef {import("flux-mongo-db-id-increment/src/FluxMongoDbIdIncrement.mjs").FluxMongoDbIdIncrement} FluxMongoDbIdIncrement */
 
 export class FluxMongoDbDataIdToIdIncrement {
     /**
